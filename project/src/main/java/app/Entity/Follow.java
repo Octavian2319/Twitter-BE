@@ -1,9 +1,29 @@
-package app.Follow;
+package app.Entity;
 
-import app.entity.User;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
+@Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Table(name = "follow")
 public class Follow {
-    private User user;
-    private User following;
-    private Long timestamp;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+
+    @ManyToOne
+    @JoinColumn(name = "follower_id")
+    private User follower;
+
+    @ManyToOne
+    @JoinColumn(name = "followed_id")
+    private User followed;
+
+    private Date timestamp;
 }

@@ -1,9 +1,4 @@
-package app.Like;
-
-import app.Post.Post;
-import app.entity.User;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+package app.Entity;
 
 
 public class Like {

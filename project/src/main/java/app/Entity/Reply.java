@@ -1,6 +1,5 @@
-package app.Reply;
+package app.Entity;
 
-import app.Post.Post;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
