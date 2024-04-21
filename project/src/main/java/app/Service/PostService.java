@@ -1,9 +1,13 @@
 package app.Service;
 
-import app.Post.Post;
-import org.springframework.stereotype.Service;
+import app.DTO.PostDTO;
+import app.Entity.Post;
 
-@Service
-public class PostService {
+import java.util.List;
 
+public interface PostService {
+
+     void createPost(String username, PostDTO postDTO);
+     void deletePost(int id);
+     List<Post> AllPost();
 }

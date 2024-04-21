@@ -1,5 +1,5 @@
 
 
   use datatwitter;
---  select *from user;
--- delete from datatwitter.user WHERE id=2;
+  select *from users;
+-- delete from datatwitter.users WHERE id=3;

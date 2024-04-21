@@ -1,23 +1,22 @@
 package app.Controller;
 
-import app.entity.User;
+import app.Entity.User;
 import app.Service.UserService;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
+
 @Slf4j
 @RestController
-@RequestMapping("user")
+@RequestMapping("/user")
+@AllArgsConstructor
 public class UserController {
 
     private final UserService userService;
-
-
-    public UserController(UserService userService){
-        this.userService=userService;
-    }
 
     @PostMapping("")
     @ResponseStatus(HttpStatus.ACCEPTED)
@@ -28,15 +27,19 @@ public class UserController {
     @GetMapping("/{username}")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public User search(@PathVariable String username)  {
-        User user = userService.searchUser(username);
-        if(user !=null){
-            log.info("S-a gasit user-ul");
-            return user;
-        }
-        else{
-            log.info("User-ul nu exista");
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        }
+        return userService.searchUser(username);
+    }
+
+    @GetMapping("/all-users")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public List<User> allUsers(){
+        return userService.searchAll();
+    }
+
+    @DeleteMapping("/{username}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public void delete(@PathVariable String username){
+        userService.deleteUser(username);
     }
 
 

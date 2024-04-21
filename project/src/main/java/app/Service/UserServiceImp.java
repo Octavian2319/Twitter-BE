@@ -1,19 +1,21 @@
 package app.Service;
 
 import app.Repository.UserRepo;
-import app.entity.User;
+import app.Entity.User;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
+
+import java.util.List;
 
 
 @Service
 @Slf4j
+@AllArgsConstructor
 public class UserServiceImp implements UserService {
     private final UserRepo userRepo;
-
-    public UserServiceImp(UserRepo userRepo){
-        this.userRepo=userRepo;
-    }
 
     @Override
     public void register(User user) {
@@ -24,10 +26,33 @@ public class UserServiceImp implements UserService {
     @Override
     public User searchUser(String username) {
         log.info("S-a cautat un user\n");
-        return userRepo.findByUsername(username);
+        User user= userRepo.findByUsername(username);
+        if(username!=null){
+            return user;
+        }
+        else{
+            log.info("User-ul nu exista");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
     }
 
+    @Override
+    public void deleteUser(String username) {
+        User user=userRepo.findByUsername(username);
+        if(username!=null){
+            log.info("S-a sters un user!");
+            userRepo.delete(user);
+        }
+        else{
+            log.info("User-ul nu exista");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+    }
 
+    @Override
+    public List<User> searchAll() {
+        return userRepo.findAll();
+    }
 
 
 }

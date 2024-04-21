@@ -1,33 +1,44 @@
-package app.entity;
+package app.Entity;
 
-import app.Post.Post;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.lang.NonNull;
 
 import java.util.List;
+
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "users_table")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @NonNull
     private int id;
-    @NonNull
+    @NotNull
     private String username;
+
     private String firstName;
+
     private String lastName;
-    @NonNull
+    @NotNull
     private String email;
-    @NonNull
+    @NotNull
     private String password;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
     private List<Post> posts;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "follower",cascade = CascadeType.ALL)
+    private  List<Follow> following;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "followed",cascade = CascadeType.ALL)
+    private List<Follow> followers;
 
 }
