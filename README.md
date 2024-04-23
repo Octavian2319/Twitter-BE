@@ -20,4 +20,5 @@ Bine ai venit la backend-ul Twitter - un sistem puternic pentru gestionarea comp
 
 1. **Clonează repository-ul:**
 
-git clone https://github.com/utilizator/backend-twitter.git
+git clone https://github.com/Octavian2319/Twitter-BE.git
+
