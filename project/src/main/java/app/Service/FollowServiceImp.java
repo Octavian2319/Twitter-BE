@@ -6,7 +6,9 @@ import app.Repository.FollowRepo;
 import app.Repository.UserRepo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Date;
 
@@ -31,5 +33,18 @@ public class FollowServiceImp implements FollowService {
         follow.setFollowed(user2);
         log.info("Follow intre useri");
         followRepo.save(follow);
+    }
+
+    @Override
+    public void unfollow(String username1, String username2) {
+        User user1=userRepo.findByUsername(username1);
+        User user2=userRepo.findByUsername(username2);
+        if(user1==null || user2==null){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+        else{
+            Follow follow=followRepo.findByFollowerAndFollowed(user1,user2);
+            followRepo.delete(follow);
+        }
     }
 }
