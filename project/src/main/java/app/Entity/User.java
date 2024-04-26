@@ -41,4 +41,7 @@ public class User {
     @OneToMany(mappedBy = "followed",cascade = CascadeType.ALL)
     private List<Follow> followers;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+    private List<Like> likes;
 }

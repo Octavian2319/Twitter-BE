@@ -14,9 +14,14 @@ import lombok.NoArgsConstructor;
 @Table(name = "likes_table")
 public class Like {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     @ManyToOne
     @JsonIgnore
     @JoinColumn(name="like_id")
     private Post post;
+    @ManyToOne
+    @JsonIgnore
+    @JoinColumn(name="user_id")
+    private User user;
 }
