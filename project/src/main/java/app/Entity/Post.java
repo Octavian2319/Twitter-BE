@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.util.Date;
+import java.util.List;
+
 
 @Entity
 @Data
@@ -23,5 +25,9 @@ public class Post {
     @JsonIgnore
     @JoinColumn(name="user_id")
     private User user;
+
+    @OneToMany(mappedBy="post",cascade = CascadeType.ALL)
+
+    private List<Like> likes;
 
 }

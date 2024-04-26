@@ -1,5 +1,6 @@
 package app.Service;
 
+import app.DTO.UserDTO;
 import app.Repository.UserRepo;
 import app.Entity.User;
 import lombok.AllArgsConstructor;
@@ -24,11 +25,16 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public User searchUser(String username) {
+    public UserDTO searchUser(String username) {
         log.info("S-a cautat un user\n");
         User user= userRepo.findByUsername(username);
         if(username!=null){
-            return user;
+            UserDTO userDto = new UserDTO();
+            userDto.setUsername(user.getUsername());
+            userDto.setFirstName(user.getFirstName());
+            userDto.setLastName(user.getLastName());
+            userDto.setEmail(user.getEmail());
+            return userDto;
         }
         else{
             log.info("User-ul nu exista");

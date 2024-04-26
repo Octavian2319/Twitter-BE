@@ -5,6 +5,6 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @AllArgsConstructor
-public class Reply extends Post {
+public class Reply  {
     private boolean publicPost;
 }

@@ -1,5 +1,6 @@
 package app.Service;
 
+import app.DTO.UserDTO;
 import app.Entity.User;
 import org.springframework.stereotype.Service;
 
@@ -9,7 +10,7 @@ import java.util.List;
 public interface UserService {
 
     void register(User user);
-    User searchUser(String username);
+    UserDTO searchUser(String username);
     void deleteUser(String username);
     List<User> searchAll();
 }

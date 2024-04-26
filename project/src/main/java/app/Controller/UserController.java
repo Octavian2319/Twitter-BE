@@ -1,12 +1,12 @@
 package app.Controller;
 
+import app.DTO.UserDTO;
 import app.Entity.User;
 import app.Service.UserService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -26,7 +26,7 @@ public class UserController {
 
     @GetMapping("/{username}")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public User search(@PathVariable String username)  {
+    public UserDTO search(@PathVariable String username)  {
         return userService.searchUser(username);
     }
 
