@@ -29,6 +29,7 @@ public class PostController {
     public void deletePost(@PathVariable int id ){
         postService.deletePost(id);
     }
+
     @GetMapping("/all-posts")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public List<Post> allPost(){

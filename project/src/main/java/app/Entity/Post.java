@@ -27,7 +27,8 @@ public class Post {
     private User user;
 
     @OneToMany(mappedBy="post",cascade = CascadeType.ALL)
-
     private List<Like> likes;
 
+    @OneToMany(mappedBy = "post",cascade = CascadeType.ALL)
+    private  List<Reply> replies;
 }

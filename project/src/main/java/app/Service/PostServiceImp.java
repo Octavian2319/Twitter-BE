@@ -7,7 +7,9 @@ import app.Repository.PostRepo;
 import app.Repository.UserRepo;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Date;
 import java.util.List;
@@ -22,6 +24,10 @@ public class PostServiceImp implements PostService{
 
    public void createPost(String username , PostDTO postDTO){
         User foundUser = userRepo.findByUsername(username);
+        if(foundUser==null){
+            log.info("Userul nu exista");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
         log.info("S-a creat o postare");
         Post post = new Post();
         post.setMessage(postDTO.getMessage());
